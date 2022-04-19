@@ -1,24 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>Hello there!</h1>
+  <p>This is the new style</p>
+  <div style="background-color: var(--error)"><p><b>DANGER</b></p></div>
+  <div style="background-color: var(--warning)"><p><b>Warning</b></p></div>
+  <div style="background-color: var(--information)"><p><i>Information</i></p></div>
+  <footer><p>Vilhelm Niemi, Jonathan Methuen</p></footer>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+
   }
 }
 </script>
 
 <style>
+@import "./assets/styles/colors.css";
+@import "./assets/styles/theme.css";
+@import "./assets/styles/elements.css";
+@import "./assets/styles/components.css";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;

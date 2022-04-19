@@ -1,0 +1,17 @@
+html {
+    background-color: var(--background-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--text-heading-color);
+}
+
+p, span {
+    font-family: var(--font-paragraph);
+    color: var(--text-paragraph-color);
+}
+
+footer > p, footer > span {
+    color: var(--watermark);
+}

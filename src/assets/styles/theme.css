@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Commissioner:wght@368&family=Fraunces:wght@705&display=swap");
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Colors */
+        --background-color: var(--gray-dark);
+        --border-color: var(--gray);
+        --text-heading-color: var(--white);
+        --text-paragraph-color: var(--white);
+
+        --warning: var(--yellow);
+        --watermark: var(--gray-light);
+
+        --drop-shadow-color-dynamic: var(--gray);
+        --drop-shadow-color-static: var(--black);
+    }
+}
+
+/* Light theme */
+@media (prefers-color-scheme: light) {
+    :root {
+        /* Colors */
+        --background-color: var(--white);
+        --border-color: var(--gray-light);
+        --text-heading-color: var(--gray-dark);
+        --text-paragraph-color: var(--black);
+
+        --warning: var(--orange);
+        --watermark: var(--gray-light);
+
+        --drop-shadow-color-dynamic: var(--gray-light);
+        --drop-shadow-color-static: var(--gray-dark);
+    }
+}
+
+/* System theme agnostic parts */
+:root {
+    /* Colors */
+    --information: var(--blue);
+    --success: var(--green);
+    --error: var(--red);
+
+    /* Fonts */
+    --font-heading: "Fraunces", serif;
+    --font-paragraph: "Commissioner", sans-serif;
+
+    /* Proportions */
+    --margin-small: 1%;
+    --margin-medium: 5%;
+    --margin-large: 10%;
+
+    --border-width: 1px;
+    --border-radius-blunt: 2px;
+    --border-radius-round: 4px;
+
+    --padding-small: 1%;
+    --padding-medium: 5%;
+    --padding-large: 10%;
+
+    /* Rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Filters */
+    --drop-shadow-static-blur: 3px;
+    --drop-shadow-static-offset-y: 0px;
+    --drop-shadow-static-offset-x: 0px;
+
+    --drop-shadow-dynamic-blur: 0px;
+    --drop-shadow-dynamic-offset-y: 3px;
+    --drop-shadow-dynamic-offset-x: 0px;
+
+    /* Filters */
+    --drop-shadow-static: drop-shadow(0px 0px 3px var(--drop-shadow-color-static));
+    --drop-shadow-dynamic: drop-shadow(0px 2px 0px var(--drop-shadow-color-dynamic));
+}
