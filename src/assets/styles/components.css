@@ -1,0 +1,48 @@
+#app {
+    margin: 0;
+}
+
+.static-block {
+    margin: var(--margin-small);
+    border-radius: var(--border-radius-sharp);
+    padding: var(--padding-small);
+    filter: var(--drop-shadow-static);
+
+    background-color: var(--background-color);
+}
+
+.dynamic-block {
+    filter: var(--drop-shadow-color-dynamic);
+    background-color: var(--background-color);
+    width: max-content;
+
+}
+
+.dynamic-block:active {
+    filter: none;
+}
+
+.border {
+    border-style: solid;
+    border-width: var(--border-width);
+    border-color: var(--border-color);
+}
+
+.border-bottom {
+    border-bottom-style: solid;
+    border-bottom-width: var(--border-width);
+    border-bottom-color: var(--border-color);
+}
+
+.border-top {
+    border-top-style:solid;
+    border-top-width: var(--border-width);
+    border-top-color: var(--border-color);
+}
+
+.vertical-center {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}

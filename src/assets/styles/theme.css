@@ -1,15 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Commissioner:wght@368&family=Fraunces:wght@705&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 /* Dark theme */
 @media (prefers-color-scheme: dark) {
     :root {
-        /* Colors */
+        --good: var(--green);
+        --neutral: var(--blue);
+        --bad-slightly: var(--orange);
+        --bad: var(--red);
+
         --background-color: var(--gray-dark);
         --border-color: var(--gray);
         --text-heading-color: var(--white);
         --text-paragraph-color: var(--white);
 
-        --warning: var(--yellow);
         --watermark: var(--gray-light);
 
         --drop-shadow-color-dynamic: var(--gray);
@@ -20,30 +23,41 @@
 /* Light theme */
 @media (prefers-color-scheme: light) {
     :root {
-        /* Colors */
+        --good: var(--green);
+        --neutral: var(--blue);
+        --bad-slightly: var(--yellow);
+        --bad: var(--red);
+
         --background-color: var(--white);
         --border-color: var(--gray-light);
         --text-heading-color: var(--gray-dark);
         --text-paragraph-color: var(--black);
 
-        --warning: var(--orange);
         --watermark: var(--gray-light);
 
         --drop-shadow-color-dynamic: var(--gray-light);
-        --drop-shadow-color-static: var(--gray-dark);
+        --drop-shadow-color-static: var(--gray-light);
     }
 }
 
 /* System theme agnostic parts */
 :root {
     /* Colors */
-    --information: var(--blue);
-    --success: var(--green);
-    --error: var(--red);
+    --information-text-color: var(--neutral);
+    --information-background-color: var(--background-color);
+
+    --success-text-color: var(--good);
+    --success-background-color: var(--background-color);
+
+    --warning-text-color: var(--bad-slightly);
+    --warning-background-color: var(--background-color);
+
+    --error-text-color: var(--bad);
+    --error-background-color: var(--background-color);
 
     /* Fonts */
-    --font-heading: "Fraunces", serif;
-    --font-paragraph: "Commissioner", sans-serif;
+    --font-heading: 'Open Sans', sans-serif;
+    --font-paragraph: 'Open Sans', sans-serif;
 
     /* Proportions */
     --margin-small: 1%;
@@ -51,27 +65,34 @@
     --margin-large: 10%;
 
     --border-width: 1px;
-    --border-radius-blunt: 2px;
-    --border-radius-round: 4px;
+    --border-radius-sharp: 2px;
+    --border-radius-blunt: 4px;
+    --border-radius-round: 8px;
 
-    --padding-small: 1%;
-    --padding-medium: 5%;
-    --padding-large: 10%;
+    --padding-small: 0.25em;
+    --padding-medium: 1em;
+    --padding-large: 2.5em;
+
+    --icon-size-small: 1em;
+    --icon-size-medium: 2em;
+    --icon-size-large: 3em;
+
+    --font-size-small: 0.67em;
+    --font-size-medium: 1em;
+    --font-size-large: 1.5em;
+
+    --heading-size-1: 2em;
+    --heading-size-2: 1.5em;
+    --heading-size-3: 1.17em;
+    --heading-size-4: 1em;
+    --heading-size-5: 0.83em;
+    --heading-size-6: 0.67em;
 
     /* Rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
     /* Filters */
-    --drop-shadow-static-blur: 3px;
-    --drop-shadow-static-offset-y: 0px;
-    --drop-shadow-static-offset-x: 0px;
-
-    --drop-shadow-dynamic-blur: 0px;
-    --drop-shadow-dynamic-offset-y: 3px;
-    --drop-shadow-dynamic-offset-x: 0px;
-
-    /* Filters */
-    --drop-shadow-static: drop-shadow(0px 0px 3px var(--drop-shadow-color-static));
+    --drop-shadow-static: drop-shadow(0px 2px 2px var(--drop-shadow-color-static));
     --drop-shadow-dynamic: drop-shadow(0px 2px 0px var(--drop-shadow-color-dynamic));
 }

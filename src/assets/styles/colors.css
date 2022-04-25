@@ -7,6 +7,19 @@
     --red: #e71d36;
     --orange: #f86624;
     --yellow: #f9c80e;
-    --green: #90be6d;
+    --green: #6a994e;
     --blue: #1982c4;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --gray-light: #d1d1d1;
+        --gray: #9e9e9e;
+        --gray-dark: #6b6b6b;
+
+        --red: #ef476f;
+        --yellow: #ffd166;
+        --green: #06d6a0;
+        --blue: #00bbf9;
+    }
 }
