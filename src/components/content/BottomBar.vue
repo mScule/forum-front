@@ -1,6 +1,6 @@
 <template>
   <section class="border-top">
-    <IconButton icon-name="add"/>
+    <IconButton icon-name="add" @click="$emit('change-view','post-creation')"/>
   </section>
 </template>
 

@@ -1,6 +1,7 @@
 <template>
   <button class="vertical-center">
-      <SvgIcon :name="iconName" :size="size"/>
+      <SvgIcon v-if="active" :name="iconName" :size="size" active/>
+      <SvgIcon v-else :name="iconName" :size="size"/>
   </button>
 </template>
 
@@ -15,7 +16,8 @@ export default {
     size: {
       type: String,
       default: "medium",
-    }
+    },
+    active: Boolean,
   },
 }
 </script>

@@ -9,7 +9,7 @@
   <BaseSign
       v-else-if="type === 'warning'"
       class="warning"
-      heading="Warning"
+      heading="Be aware"
       :message="message"
       icon-name="warning"
       icon-color="--warning-text-color"

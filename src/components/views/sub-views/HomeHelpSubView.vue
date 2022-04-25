@@ -2,7 +2,7 @@
   <SubView title="Post feed - help" return-to="home">
     <SubSection class="home-help-sub-view-explanations" title="Post color codes">
       <p>
-        The color codes indicates the reception of the posts.
+        The color codes indicate the reception of the posts.
         Color codes are explained below.
       </p>
       <div>

@@ -46,3 +46,22 @@
     justify-content: center;
     height: 100%;
 }
+
+.horizontal-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.row-between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.column-between {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

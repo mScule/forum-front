@@ -1,14 +1,19 @@
 <template>
-  <div class="post-link border">
-    <header>
-      <h2>{{ authorName }}:</h2>
-      <h3 :style="`color: var(${colorWithVoteRatio()})`">{{ postName }}</h3>
+  <div class="border post-link-container" :style="`border-color: var(${colorWithVoteRatio()})`">
+    <header class="post-link-name-header border-bottom" :style="`border-color: var(${colorWithVoteRatio()});`">
+      <h4 :style="`color: var(${colorWithVoteRatio()})`">{{ postName }}</h4>
     </header>
-    <div class="post-link-info-row">
-      <p>Votes: <b>{{ upVotes - downVotes }}</b></p>
-      <p>Date:
-        <b>{{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</b></p>
-    </div>
+
+    <section class="post-link">
+      <div class="post-link-info-row">
+        <p>Author: <i>{{authorName}}</i></p>
+      </div>
+
+      <div class="post-link-info-row">
+        <p>Votes: <i>{{ upVotes - downVotes }}</i></p>
+        <p class="post-link-date">Date: <i>{{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</i></p>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -16,7 +21,6 @@
 export default {
   name: "PostLink",
   props: {
-    color: String,
     postName: String,
     authorName: String,
     upVotes: Number,
@@ -50,9 +54,20 @@ header {
   justify-content: space-between;
 }
 
-header h3 {
+header h4 {
   margin-top: 0;
   margin-bottom: var(--margin-medium);
+}
+
+.post-link-container {
+  cursor: pointer;
+  border-radius: var(--border-radius-round);
+}
+
+.post-link-name-header h4 {
+  margin: 0;
+  padding: var(--padding-medium);
+  overflow: hidden;
 }
 
 .post-link-info-row {
@@ -68,15 +83,16 @@ p {
   justify-content: space-between;
 }
 
+.post-link-date {
+  text-align: right;
+}
+
 .post-link {
-  cursor: pointer;
   padding: var(--padding-medium);
   border-radius: var(--border-radius-round);
-  border-color: var(--text-paragraph-color);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: var(--margin-medium);
 }
 
 .post-link:first-child {
