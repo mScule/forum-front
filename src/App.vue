@@ -1,9 +1,26 @@
 <template>
-<main>
-  <TopBar @change-view="changeView"/>
-  <component @open-post="openPost" @change-view="changeView" :is="selectedView"></component>
-  <BottomBar @change-view="changeView" v-if="user().hasLoggedIn() && selectedView.name === 'HomeView'"/>
-</main>
+  <main>
+    <TopBar @change-view="changeView"/>
+
+    <NotificationAlert
+        v-if="notification"
+        @close-notification-alert="closeAlert()"
+        :type="notificationAlertProps.type"
+        :message="notificationAlertProps.message"
+    />
+
+    <component
+        @alert="showAlert"
+        @open-post="openPost"
+        @change-view="changeView"
+        :is="selectedView">
+    </component>
+
+    <BottomBar
+        @change-view="changeView"
+        v-if="user().hasLoggedIn() && selectedView.name === 'HomeView'"
+    />
+  </main>
 </template>
 
 <script>
@@ -24,6 +41,8 @@ import UserSignUpSubView from "@/components/views/sub-views/UserSignUpSubView";
 import PostCreationSubView from "@/components/views/sub-views/PostCreationSubView";
 import PostSubView from "@/components/views/sub-views/PostSubView";
 
+import NotificationAlert from "@/components/notifications/NotificationAlert";
+
 export default {
   name: "App",
   components: {
@@ -36,26 +55,52 @@ export default {
     UserSignUpSubView,
     PostCreationSubView,
     PostSubView,
+    NotificationAlert,
   },
+
   data() {
     return {
       selectedView: HomeView,
+      notificationAlertProps: null,
     }
   },
+
+  computed: {
+    notification: function () {
+      return this.notificationAlertProps !== null;
+    },
+  },
+
   methods: {
-    changeView (viewName) {
+    changeView(viewName) {
       switch (viewName) {
-        case "home": return this.selectedView = HomeView;
-        case "home-help": return this.selectedView = HomeHelpSubView;
-        case "user": return this.selectedView = UserView;
-        case "user-login": return this.selectedView = UserLoginSubView;
-        case "user-sign-up": return this.selectedView = UserSignUpSubView;
-        case "post-creation": return this.selectedView = PostCreationSubView;
+        case "home":
+          return this.selectedView = HomeView;
+        case "home-help":
+          return this.selectedView = HomeHelpSubView;
+        case "user":
+          return this.selectedView = UserView;
+        case "user-login":
+          return this.selectedView = UserLoginSubView;
+        case "user-sign-up":
+          return this.selectedView = UserSignUpSubView;
+        case "post-creation":
+          return this.selectedView = PostCreationSubView;
       }
     },
-    openPost (postId) {
+    openPost(postId) {
       this.selectedView = PostSubView;
       PostSubView.methods.setPostId(postId);
+    },
+    showAlert(alert) {
+      this.notificationAlertProps = {
+        type: alert.type,
+        message: alert.message,
+      };
+      console.log(this.notification);
+    },
+    closeAlert() {
+      this.notificationAlertProps = null;
     },
     cookies: () => cookies,
     millis: () => millis,
@@ -63,6 +108,12 @@ export default {
   },
   mounted() {
     this.cookies().set("forum_api_key", "0", this.millis().fromMinutes(5));
+    this.showAlert(
+        {
+          type: "warning",
+          message: "Your post has 6000 dislikes! You are now considered toxic user"
+        }
+    );
   }
 }
 </script>

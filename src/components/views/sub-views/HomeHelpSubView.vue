@@ -6,38 +6,38 @@
         Color codes are explained below.
       </p>
       <div>
-        <h3>Good post</h3>
+        <h3>Fine</h3>
         <IconExplainer
             icon-name="square"
             icon-color="--good"
-            explanation="Post has 1 or more votes."
+            explanation="Post has more positive votes than negative ones. Post author is fine (for now)"
         />
       </div>
 
       <div>
-        <h3>Neutral post</h3>
+        <h3>50/50</h3>
         <IconExplainer
             icon-name="square"
             icon-color="--neutral"
-            explanation="Post has 0 votes."
+            explanation="Post has 0 votes. Post author is on the edge."
         />
       </div>
 
       <div>
-        <h3>Controversial post</h3>
+        <h3>You are trash</h3>
         <IconExplainer
             icon-name="square"
             icon-color="--bad-slightly"
-            explanation="Post has negative votes, but less than 10."
+            explanation="Post has negative votes, but less than 30. Post author is presumably trash."
         />
       </div>
 
       <div>
-        <h3>Toxic post</h3>
+        <h3>Delete System32</h3>
         <IconExplainer
             icon-name="square"
             icon-color="--bad"
-            explanation="Post has 10 or more negative votes."
+            explanation="Post has 30 or more negative votes. Post author should stop using any social media altogether."
         />
       </div>
     </SubSection>

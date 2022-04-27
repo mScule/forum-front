@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import BaseSign from "@/components/signs/BaseSign";
+import BaseSign from "@/components/notifications/BaseSign";
 
 export default {
   name: "NotificationSign",

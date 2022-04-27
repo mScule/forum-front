@@ -8,7 +8,7 @@
   <SubSection title="Give some content">
     <div class="row-between">
       <label for="content">Content</label>
-      <IconButton icon-name="markdown"/>
+      <!--<IconButton icon-name="markdown"/>-->
     </div>
 
     <textarea id="content"></textarea>
@@ -20,7 +20,7 @@
         message="Remember. You can't delete your posts, so think twice what type of content you want to put out. Everything you publish can be tracked back to you."
     />
 
-    <TextButton text="Publish"/>
+    <TextButton @click="$emit('alert',{type: 'error', message: 'you are not logged in!'})" text="Publish"/>
   </SubSection>
 </SubView>
 </template>
@@ -28,24 +28,27 @@
 <script>
 import SubView from "@/components/views/SubView";
 import SubSection from "@/components/content/SubSection";
-import NotificationSign from "@/components/signs/NotificationSign";
-import IconButton from "@/components/buttons/IconButton";
+import NotificationSign from "@/components/notifications/NotificationSign";
+//import IconButton from "@/components/buttons/IconButton";
 import TextButton from "@/components/buttons/TextButton";
 
 export default {
   name: "PostCreationSubView",
   components: {
     TextButton,
-    IconButton,
+    //IconButton,
     NotificationSign,
     SubSection,
     SubView,
+  },
+  mounted() {
+    this.$emit("alert", {type: "information", message: "Geeeesss"});
   }
 }
 </script>
 
 <style scoped>
   textarea {
-    margin: 0;
+    margin-bottom: 0;
   }
 </style>

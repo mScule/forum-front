@@ -54,6 +54,12 @@
     width: 100%;
 }
 
+.row-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
 .row-between {
     display: flex;
     flex-direction: row;

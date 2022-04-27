@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import NotificationSign from "@/components/signs/NotificationSign";
+import NotificationSign from "@/components/notifications/NotificationSign";
 import SubView from "@/components/views/SubView";
 import SubSection from "@/components/content/SubSection";
 import FormSection from "@/components/forms/FormSection";
