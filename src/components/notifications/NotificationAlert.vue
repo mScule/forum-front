@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 100%" :class="bannerState">
+  <div :class="animationState">
     <NotificationSign :type="type" :message="message"/>
   </div>
 </template>
@@ -18,12 +18,12 @@ export default {
   },
   data() {
     return {
-      bannerState: "notification-banner-fadein",
+      animationState: "notification-alert-fadein",
     }
   },
   mounted() {
-    setTimeout(() => this.bannerState = "notification-banner-fadeout", timeout - 200);
-    setTimeout(() => this.$emit("close-notification-alert"), timeout);
+    setTimeout(() => this.animationState = "notification-alert-fadeout", timeout);
+    setTimeout(() => this.$emit("close-notification-alert"), timeout + 200);
   }
 }
 </script>
@@ -32,43 +32,47 @@ export default {
 div {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+  left: var(--margin-medium);
+  right:  var(--margin-medium);
   margin-top: calc(5em + var(--border-width));
-  width: 100%;
   z-index: 2;
 }
-.notification-banner-fadein {
+.notification-alert-fadein {
   animation-name: fadein;
   animation-duration: 200ms;
-  animation-timing-function: ease-out;
+  animation-timing-function: linear;
 }
-
-.notification-banner-fadeout {
+.notification-alert-fadeout {
   animation-name: fadeout;
   animation-duration: 200ms;
-  animation-timing-function: ease-in;
+  animation-timing-function: linear;
 }
-
 @keyframes fadein {
   from {
     opacity: 0;
     transform: translateY(calc(-4.8em - var(--border-width)));
+    left:1em;
+    right:1em;
   }
   to {
     opacity: 1;
     transform: translateY(calc(-5em - var(--border-width)));
+    left: 0;
+    right: 0;
   }
 }
-
 @keyframes fadeout {
   from {
     opacity: 1;
     transform: translateY(calc(-5em - var(--border-width)));
+    left: 0;
+    right: 0;
   }
   to {
     opacity: 0;
     transform: translateY(calc(-5.2em - var(--border-width)));
+    left:1em;
+    right:1em;
   }
 }
 </style>

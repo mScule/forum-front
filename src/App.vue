@@ -18,14 +18,12 @@
 
     <BottomBar
         @change-view="changeView"
-        v-if="user().hasLoggedIn() && selectedView.name === 'HomeView'"
+        v-if="this.user().hasLoggedIn() && selectedView.name === 'HomeView'"
     />
   </main>
 </template>
 
 <script>
-import cookies from "@/utilities/cookies";
-import millis from "@/utilities/millis";
 import user from "@/utilities/user";
 
 import TopBar from "@/components/content/TopBar";
@@ -72,6 +70,7 @@ export default {
   },
 
   methods: {
+    user: () => user,
     changeView(viewName) {
       switch (viewName) {
         case "home":
@@ -97,23 +96,10 @@ export default {
         type: alert.type,
         message: alert.message,
       };
-      console.log(this.notification);
     },
     closeAlert() {
       this.notificationAlertProps = null;
     },
-    cookies: () => cookies,
-    millis: () => millis,
-    user: () => user,
-  },
-  mounted() {
-    this.cookies().set("forum_api_key", "0", this.millis().fromMinutes(5));
-    this.showAlert(
-        {
-          type: "warning",
-          message: "Your post has 6000 dislikes! You are now considered toxic user"
-        }
-    );
   }
 }
 </script>

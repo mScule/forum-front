@@ -10,30 +10,56 @@
         <FormRow place="first">
           <label for="username">Username</label>
 
-          <input type="text" id="username" name="username" placeholder="Username"/>
+          <input
+              type="text"
+              id="username"
+              v-model.trim="fields.name"
+              placeholder="Username"
+              required
+          />
         </FormRow>
 
         <FormRow>
           <label for="email">Email</label>
 
-          <input type="email" id="email" name="email" placeholder="Email address"/>
+          <input
+              type="email"
+              id="email"
+              v-model="fields.email"
+              placeholder="Email address"
+              required
+          />
         </FormRow>
 
         <FormRow place="last">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="Password"/>
+          <input
+              type="password"
+              id="password"
+              v-model="fields.password"
+              placeholder="Password"
+              required
+          />
 
           <label for="passord-repeated">Repeat password</label>
-          <input type="password" id="passord-repeated" name="password-repeated" placeholder="Repeat password"/>
+          <input
+              type="password"
+              id="passord-repeated"
+              v-model="fields.passwordRepeated"
+              placeholder="Repeat password"
+              required
+          />
         </FormRow>
 
-        <TextButton text="Sign up"/>
+        <TextButton @click="signup()" text="Sign up"/>
       </FormSection>
     </SubSection>
   </SubView>
 </template>
 
 <script>
+import userSignup from "@/api/features/user-signup";
+
 import NotificationSign from "@/components/notifications/NotificationSign";
 import SubView from "@/components/views/SubView";
 import SubSection from "@/components/content/SubSection";
@@ -43,7 +69,35 @@ import TextButton from "@/components/buttons/TextButton";
 
 export default {
   name: "UserSignUpSubView",
-  components: {TextButton, FormRow, FormSection, SubSection, SubView, NotificationSign}
+  components: {TextButton, FormRow, FormSection, SubSection, SubView, NotificationSign},
+  methods: {
+    signup() {
+      if (this.fields.password !== this.fields.passwordRepeated) {
+        this.$emit("alert", {type: "error", message: "Repeated password doesn't match"});
+        return;
+      }
+
+      userSignup.userSignup(this.fields).then(success => {
+        if (success)
+          this.$emit("alert", {
+            type: "success",
+            message: "Signup was successfull! You can sign in to your new acconut."
+          });
+        else
+          this.$emit("alert", {type: "error", message: "Signup was unsuccessfull"});
+      });
+    }
+  },
+  data() {
+    return {
+      fields: {
+        name: "",
+        email: "",
+        password: "",
+        passwordRepeated: "",
+      }
+    }
+  }
 }
 </script>
 

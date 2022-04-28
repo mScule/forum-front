@@ -7,7 +7,7 @@ export default {
         document.cookie = `${name}=${value}; expires=${curDate.toUTCString()}; path=/;Secure`;
     },
     delete(name) {
-        console.log("deleting" + name);
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
     },
     get(name) {
         const
@@ -23,7 +23,6 @@ export default {
             }
         }
 
-        console.log("Cookie value: " + value);
         return value;
     },
     getAll() {

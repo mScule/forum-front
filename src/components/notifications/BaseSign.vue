@@ -12,7 +12,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import SvgIcon from "@/components/icons/SvgIcon";
 
