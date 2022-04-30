@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import userSignup from "@/api/features/user-signup";
+import userSignup from "@/api/features/user/user-signup";
 
 import NotificationSign from "@/components/notifications/NotificationSign";
 import SubView from "@/components/views/SubView";

@@ -14,16 +14,22 @@ export default {
                     console.log(e);
                     res = false;
                 })
-            return res.data;
+            return res.data[0];
         },
         set: async (fields) => {
             const req = apiAxios.createInstance();
             let res;
             await req.put("/users", {
-                name: sanitize.text(fields.name),
-                email: sanitize.email(fields.email),
-                password: sanitize.password(fields.password),
-                disabled: false
+                username_current: sanitize.text(fields.username_current),
+                username_new: sanitize.text(fields.username_new),
+
+                email_current: sanitize.email(fields.email_current),
+                email_new: sanitize.email(fields.email_new),
+
+                password_current: sanitize.password(fields.password_current),
+                password_new: sanitize.password(fields.password_new),
+
+                disabled: false,
             })
                 .then(() => {
                     res = true;

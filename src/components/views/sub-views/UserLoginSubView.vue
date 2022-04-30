@@ -30,7 +30,7 @@
 
 <script>
 import user from "@/utilities/user";
-import userLogin from "@/api/features/user-login";
+import userLogin from "@/api/features/user/user-login";
 
 import SubView from "@/components/views/SubView";
 import SubSection from "@/components/content/SubSection";
