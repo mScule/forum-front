@@ -8,12 +8,13 @@ export default {
         let res;
         await req.get("/publications", {
             params: {
-                private: "",
+                private: "0",
                 publication_id: "any",
                 user_id: "any",
                 type: "post",
                 title: "any",
-                content: "any"
+                content: "any",
+                reply_to_id: "any"
             }
         })
             .then(posts => res = posts)
