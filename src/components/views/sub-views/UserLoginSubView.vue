@@ -3,12 +3,12 @@
     <SubSection title="Give your email, and password">
       <FormSection>
         <FormRow place="first">
-          <label for="email">Email address</label>
+          <label for="username">Username</label>
           <input
-              type="email"
+              type="text"
               v-model="fields.name"
-              id="email"
-              placeholder="email address"
+              id="username"
+              placeholder="Username"
               required
           />
         </FormRow>
@@ -37,6 +37,7 @@ import SubSection from "@/components/content/SubSection";
 import TextButton from "@/components/buttons/TextButton";
 import FormSection from "@/components/forms/FormSection";
 import FormRow from "@/components/forms/FormRow";
+
 export default {
   name: "UserLoginSubView",
   components: {FormRow, FormSection, TextButton, SubSection, SubView},

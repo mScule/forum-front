@@ -17,35 +17,7 @@
       </div>
     </div>
     <h4>Comments: </h4>
-    <CommentContainer
-        author="Jack Collin"
-        comment="Hello there"
-        :date="new Date(2022, 4, 26)"
-        up-votes="1"
-        down-votes="0"
-    />
-    <CommentContainer
-        author="Jack Collin"
-        comment="Hello there"
-        :date="new Date(2022, 4, 26)"
-        up-votes="1"
-        down-votes="0"
-        author-is-user="true"
-    />
-    <CommentContainer
-        author="User"
-        comment="Hello there"
-        :date="new Date(2022, 4, 26)"
-        up-votes="1"
-        down-votes="0"
-    />
-    <CommentContainer
-        author="Jack Collin"
-        comment="Hello there"
-        :date="new Date(2022, 4, 26)"
-        up-votes="1"
-        down-votes="0"
-    />
+    <p>Construction zone!</p>
     <SubSection title="Write a comment">
       <template v-if="user().hasLoggedIn()">
         <NotificationSign
@@ -69,23 +41,22 @@ import user from "@/utilities/user";
 import SubView from "@/components/views/SubView";
 import IconButton from "@/components/buttons/IconButton";
 import SubSection from "@/components/content/SubSection";
-import CommentContainer from "@/components/content/CommentContainer";
+//import CommentContainer from "@/components/content/CommentContainer";
 import TextButton from "@/components/buttons/TextButton";
 import NotificationSign from "@/components/notifications/NotificationSign";
 
 export default {
   name: "PostSubView",
-  components: {TextButton, CommentContainer, SubSection, IconButton, SubView, NotificationSign},
+  components: {TextButton, /* CommentContainer, */ SubSection, IconButton, SubView, NotificationSign},
   methods: {
     user: () => user,
-    setPostId(postId) {
-      this.id = postId;
-      console.log(this.postId);
-    }
+  },
+  props: {
+    postId: Number,
+    posts: null,
   },
   data() {
     return {
-      id: String,
       title: "Title goes here",
       author: "Author name goes here",
       content: "Content goes here",
@@ -93,9 +64,23 @@ export default {
       upVotes: 0,
       downVotes: 0,
       commentAmt: 0,
-      authorIsUser: true,
+      authorIsUser: false,
     }
   },
+  mounted() {
+    console.log("POST-ID", this.postId);
+    for(const post of this.posts) {
+      if(post.publication_id === this.postId) {
+        this.title = post.title;
+        this.author = post.name;
+        this.content = post.content;
+        this.date = new Date(post.date);
+        this.upVotes = post.upvotes;
+        this.downVotes = post.downvotes;
+        break;
+      }
+    }
+  }
 }
 </script>
 

@@ -6,42 +6,18 @@
 
     <template v-slot:content>
       <div id="home-view-posts" :class="bottomMargin()">
-        <PostLink
-            post-name="Klikattava esimerkki"
-            author-name="Klikkendaalen"
-            up-votes="0"
-            down-votes="0"
-            :date="new Date(2022, 4, 25)"
-            @click="$emit('open-post','post-id-test')"
-        />
-        <PostLink
-            post-name="These types of forums sucks ass"
-            author-name="Liam Carollz33"
-            up-votes="4"
-            down-votes="2"
-            :date="new Date(2022, 2, 14)"
-        />
-        <PostLink
-            post-name="These types of forums sucks ass"
-            author-name="Liam Carollz33"
-            up-votes="4"
-            down-votes="2"
-            :date="new Date(2022, 2, 14)"
-        />
-        <PostLink
-            post-name="Top 10 proofs that the earth is flat."
-            author-name="Jack Wilson"
-            up-votes="4"
-            down-votes="45"
-            :date="new Date(2022, 4, 22)"
-        />
-        <PostLink
-            post-name="Top 10 proofs that the earth is flat."
-            author-name="Jack Wilson"
-            up-votes="4"
-            down-votes="45"
-            :date="new Date(2022, 4, 22)"
-        />
+        <template v-if="this.posts">
+          <template v-for="post in this.posts" :key="post.publication_id">
+            <PostLink
+                :post-name="post.title"
+                :author-name="post.name"
+                :up-votes="post.upvotes"
+                :down-votes="post.downvotes"
+                :date="new Date(post.date)"
+                @click="$emit('open-post', post.publication_id)"
+            />
+          </template>
+        </template>
         <LoadingAnimatedIcon/>
       </div>
     </template>
@@ -64,6 +40,9 @@ export default {
     PostLink,
     ViewBase,
   },
+  props: {
+    posts: null,
+  },
   methods: {
     bottomMargin() {
       if (this.user().hasLoggedIn())
@@ -75,12 +54,14 @@ export default {
     return {
       user: () => user,
     }
+  },
+  mounted() {
+    this.$emit("update-posts");
   }
 }
 </script>
 
 <style scoped>
-
 .home-view-user-has-logged-in {
   margin-bottom: calc(5em + var(--margin-medium));
 }
@@ -88,9 +69,11 @@ export default {
 #home-view-posts {
   height: max-content;
 }
+
 #home-view-posts * {
   margin-top: var(--margin-medium);
 }
+
 #home-view-posts *:first-child {
   margin-top: 0;
 }

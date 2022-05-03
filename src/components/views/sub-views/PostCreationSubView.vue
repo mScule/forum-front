@@ -2,16 +2,18 @@
 <SubView title="Create post" return-to="home">
   <SubSection title="Give title for your post">
     <label for="title">Title</label>
-    <input type="text" name="title" id="title" placeholder="Title"/>
+    <input
+        type="text"
+        name="title"
+        id="title"
+        placeholder="Title"
+        v-model="postFields.title"
+    />
   </SubSection>
 
   <SubSection title="Give some content">
-    <div class="row-between">
-      <label for="content">Content</label>
-      <!--<IconButton icon-name="markdown"/>-->
-    </div>
-
-    <textarea id="content"></textarea>
+    <label for="content">Content</label>
+    <textarea id="content" v-model="postFields.content"></textarea>
   </SubSection>
 
   <SubSection title="Publish the post">
@@ -19,30 +21,47 @@
         type="warning"
         message="Remember. You can't delete your posts, so think twice what type of content you want to put out. Everything you publish can be tracked back to you."
     />
-
-    <TextButton @click="$emit('alert',{type: 'error', message: 'you are not logged in!'})" text="Publish"/>
+    <TextButton text="Publish" @click="createPost()"/>
   </SubSection>
 </SubView>
 </template>
 
 <script>
+import postCreation from "@/api/features/post/post-creation";
+
 import SubView from "@/components/views/SubView";
 import SubSection from "@/components/content/SubSection";
 import NotificationSign from "@/components/notifications/NotificationSign";
-//import IconButton from "@/components/buttons/IconButton";
 import TextButton from "@/components/buttons/TextButton";
 
 export default {
   name: "PostCreationSubView",
   components: {
     TextButton,
-    //IconButton,
     NotificationSign,
     SubSection,
     SubView,
   },
-  mounted() {
-    this.$emit("alert", {type: "information", message: "Geeeesss"});
+  methods: {
+    createPost() {
+      postCreation.postCreation(this.postFields).then(res => {
+        if(!res) {
+          this.$emit("alert", {type:"error", message:"Post creation was unsuccessfull..."});
+          return;
+        }
+        this.$emit("alert", {type:"success", message:"Post creation was successfull!"});
+        this.postFields.title = "";
+        this.postFields.content = "";
+      });
+    }
+  },
+  data() {
+    return {
+      postFields: {
+        title: "",
+        content: "",
+      }
+    }
   }
 }
 </script>

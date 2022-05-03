@@ -13,6 +13,9 @@
         @alert="showAlert"
         @open-post="openPost"
         @change-view="changeView"
+        @update-posts="updatePosts"
+        :post-id="getPostId"
+        :posts="loadedPosts"
         :is="selectedView">
     </component>
 
@@ -25,6 +28,7 @@
 
 <script>
 import user from "@/utilities/user";
+import postFetching from "@/api/features/post/post-fetching";
 
 import TopBar from "@/components/content/TopBar";
 import BottomBar from "@/components/content/BottomBar";
@@ -60,13 +64,25 @@ export default {
     return {
       selectedView: HomeView,
       notificationAlertProps: null,
+      posts: null,
+      postId: null,
     }
+  },
+
+  mounted() {
+    this.updatePosts();
   },
 
   computed: {
     notification: function () {
       return this.notificationAlertProps !== null;
     },
+    loadedPosts() {
+      return this.posts;
+    },
+    getPostId() {
+      return this.postId;
+    }
   },
 
   methods: {
@@ -89,7 +105,8 @@ export default {
     },
     openPost(postId) {
       this.selectedView = PostSubView;
-      PostSubView.methods.setPostId(postId);
+      console.log(postId);
+      this.postId = postId;
     },
     showAlert(alert) {
       this.notificationAlertProps = {
@@ -99,6 +116,10 @@ export default {
     },
     closeAlert() {
       this.notificationAlertProps = null;
+    },
+    updatePosts() {
+      postFetching.fetchAll().then(posts => this.posts = posts);
+      console.log(this.posts);
     },
   }
 }
