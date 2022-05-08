@@ -12,14 +12,11 @@ export default {
         const req = apiAxios.createInstance();
         let res;
 
-        console.log(fields);
-
         await req.put("/login", {
             name: sanitize.text(fields.name),
             password: fields.password
         })
             .then(payload => {
-                console.log(payload);
                 res = payload;
             })
             .catch(e => {

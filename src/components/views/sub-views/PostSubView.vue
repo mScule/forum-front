@@ -21,11 +21,9 @@ export default {
   methods: {
     user: () => user,
     fetchComments() {
-      console.log("FETCHING COMMENTS");
       commentFetching.postReplies({postId: this.postId})
           .then(
               comments => {
-                console.log("COMMENTS", comments);
                 if (typeof comments === "object" && comments.length > 0)
                   this.comments = comments;
                 else
@@ -48,7 +46,6 @@ export default {
     privateComment(commentId) {
       publicationDeletion.delete(commentId).then(() => {
         setTimeout(() => {
-          console.log("DELETED");
           this.fetchComments()
         }, 100);
       });
@@ -78,7 +75,6 @@ export default {
     }
   },
   mounted() {
-    console.log("POST-ID", this.postId);
     for (const post of this.posts) {
       if (post.publication_id === this.postId) {
         this.title = post.title;
@@ -101,7 +97,7 @@ export default {
     <h4>Author: {{ author }}</h4>
     <p>{{ content }}</p>
     <div class="row-between">
-      <p class="vertical-center">Date: {{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</p>
+      <p class="vertical-center">Date: {{ `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}` }}</p>
       <div class="row-between post-sub-view-post-buttons">
         <IconButton v-if="authorIsUser" @click="privatePost" icon-name="private"/>
       </div>

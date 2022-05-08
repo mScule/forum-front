@@ -35,7 +35,7 @@ export default {
     <p>{{ comment }}</p>
     <div class="row-between">
       <div class="comment-container-date">
-        <p class="vertical-center">Date: {{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</p>
+        <p class="vertical-center">Date: {{ `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}` }}</p>
       </div>
 
       <div class="row-between comment-container-post-buttons">

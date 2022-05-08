@@ -12,8 +12,7 @@ export default {
         let res;
 
         await req.put("/logout")
-            .then(payload => {
-                console.log(payload);
+            .then(() => {
                 res = true;
             })
             .catch(e => {

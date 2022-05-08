@@ -21,12 +21,14 @@ export default {
     },
     id() {
         const userId = cookies.get("forum-user-id");
-        console.log("USER_ID", userId);
         if(userId)
             return userId;
         return false;
     },
     setUserId(id) {
         cookies.set("forum-user-id", `${id}`, millis.fromMinutes(15));
+    },
+    deleteUserId() {
+        cookies.delete("forum-user-id");
     }
 }

@@ -29,6 +29,7 @@ export default {
     user: () => user,
     logout() {
       user.setLoginStatus(false);
+      user.deleteUserId();
       userLogout.userLogout().then(res => {
         if (!res) {
           this.$emit("alert", {
@@ -46,11 +47,9 @@ export default {
     getUserData() {
       userData.userData.get()
           .then(data => {
-            console.log("DATA", data);
             this.userInfo.email_current = data.email;
             this.userInfo.username_current = data.name;
           });
-      console.log(this.userInfo);
     },
     setUserData() {
       if (this.userInfo.password_new !== this.userInfo.password_new_repeated) {

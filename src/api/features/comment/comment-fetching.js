@@ -29,12 +29,8 @@ export default {
 
         const comments = [];
 
-        console.log("RESS", res);
-
         if (typeof res.data === "object" && res.data.length > 0) {
             for (let comment of res.data) {
-                console.log("COMMENT", comment);
-
                 // Username
                 const user = await req.get("/users", {
                     params: {

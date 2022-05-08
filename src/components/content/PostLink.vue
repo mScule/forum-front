@@ -51,7 +51,9 @@ export default {
       </div>
 
       <div class="post-link-info-row">
-        <p class="post-link-date">Date: <i>{{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</i></p>
+        <p class="post-link-date">Date: <i>{{
+            `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+          }}</i></p>
       </div>
     </section>
   </div>

@@ -81,7 +81,6 @@ export default {
     },
     openPost(postId) {
       this.selectedView = PostSubView;
-      console.log(postId);
       this.postId = postId;
     },
     showAlert(alert) {
@@ -95,7 +94,6 @@ export default {
     },
     updatePosts() {
       postFetching.fetchAll().then(posts => this.posts = posts);
-      console.log(this.posts);
     },
   }
 }
