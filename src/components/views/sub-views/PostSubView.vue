@@ -3,13 +3,7 @@
     <h4>Author: {{ author }}</h4>
     <p>{{ content }}</p>
     <div class="row-between">
-      <div class="row-left post-sub-view-vote-section">
-        <p class="vertical-center">Upvotes: {{ upVotes }}</p>
-        <p class="vertical-center">Downvotes: {{ downVotes }}</p>
-      </div>
-      <div class="post-sub-view-date">
-        <p class="vertical-center">Date: {{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</p>
-      </div>
+      <p class="vertical-center">Date: {{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</p>
       <div class="row-between post-sub-view-post-buttons">
         <IconButton v-if="authorIsUser" @click="privatePost" icon-name="private"/>
       </div>
