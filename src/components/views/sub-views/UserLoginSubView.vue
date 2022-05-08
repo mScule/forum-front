@@ -1,32 +1,6 @@
-<template>
-  <SubView title="Login" return-to="user">
-    <SubSection title="Give your email, and password">
-      <FormSection>
-        <FormRow place="first">
-          <label for="username">Username</label>
-          <input
-              type="text"
-              v-model="fields.name"
-              id="username"
-              placeholder="Username"
-              required
-          />
-        </FormRow>
-        <FormRow place="last">
-          <label for="password">Password</label>
-          <input
-              type="password"
-              v-model="fields.password"
-              id="password"
-              placeholder="password"
-              required
-          />
-        </FormRow>
-        <TextButton @click="login()" text="Login"/>
-      </FormSection>
-    </SubSection>
-  </SubView>
-</template>
+<!--
+  Sub view for user login form.
+-->
 
 <script>
 import user from "@/utilities/user";
@@ -76,3 +50,33 @@ export default {
   }
 }
 </script>
+
+<template>
+  <SubView title="Login" return-to="user">
+    <SubSection title="Give your email, and password">
+      <FormSection>
+        <FormRow place="first">
+          <label for="username">Username</label>
+          <input
+              type="text"
+              v-model="fields.name"
+              id="username"
+              placeholder="Username"
+              required
+          />
+        </FormRow>
+        <FormRow place="last">
+          <label for="password">Password</label>
+          <input
+              type="password"
+              v-model="fields.password"
+              id="password"
+              placeholder="password"
+              required
+          />
+        </FormRow>
+        <TextButton @click="login()" text="Login"/>
+      </FormSection>
+    </SubSection>
+  </SubView>
+</template>

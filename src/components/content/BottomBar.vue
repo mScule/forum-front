@@ -1,8 +1,7 @@
-<template>
-  <section class="border-top">
-    <IconButton icon-name="add" @click="$emit('change-view','post-creation')"/>
-  </section>
-</template>
+<!--
+  Bar that contains the button for post creation.
+  Is only avaliable when user has logged in.
+-->
 
 <script>
 import IconButton from "@/components/buttons/IconButton";
@@ -11,6 +10,12 @@ export default {
   components: { IconButton }
 }
 </script>
+
+<template>
+  <section class="border-top">
+    <IconButton icon-name="add" @click="$emit('change-view','post-creation')"/>
+  </section>
+</template>
 
 <style scoped>
 section {

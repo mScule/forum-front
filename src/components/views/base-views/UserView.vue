@@ -1,104 +1,7 @@
-<template>
-  <ViewBase title="User">
-    <template v-slot:content>
-      <template v-if="user().hasLoggedIn()">
-        <SubSection title="Change user information">
-          <NotificationSign
-              type="information"
-              message="Due to devs being lazy, you'll have to change every user information at the same time 😔"
-          />
-          <FormSection>
-            <FormRow>
-              <label for="username">Username</label>
-              <input
-                  type="text"
-                  id="username"
-                  :placeholder="userInfoComputed.username_current"
-                  v-model="userInfo.username_new"
-              />
-            </FormRow>
-
-            <FormRow>
-              <label for="email">Email</label>
-              <input
-                  type="email"
-                  id="email"
-                  :placeholder="userInfoComputed.email_current"
-                  v-model="userInfo.email_new"
-              />
-            </FormRow>
-
-            <FormRow>
-              <label for="password">Password</label>
-              <input
-                  type="password"
-                  id="password"
-                  placeholder="Password"
-                  v-model="userInfo.password_new"
-              />
-
-              <label for="passord-repeated">Repeat password</label>
-              <input
-                  type="password"
-                  id="passord-repeated"
-                  placeholder="Repeat password"
-                  v-model="userInfo.password_new_repeated"
-              />
-            </FormRow>
-
-            <FormRow>
-              <NotificationSign
-                  type="warning"
-                  message="If you decide to remove your acconut, you can't revert the changes!"
-              />
-              <label for="user-deletion">Delete user</label>
-              <input
-                  type="checkbox"
-                  id="user-deletion"
-                  v-model="userInfo.disabled"
-              />
-            </FormRow>
-
-            <FormRow place="last">
-              <p><i>To confirm your changes, you'll have to give your current. Login info</i></p>
-              <label for="email-current">Email</label>
-                <input
-                    type="email"
-                    id="email-current"
-                    placeholder="Your current username"
-                    v-model="userInfo.email_current"
-                />
-
-                <label for="password-current">Password</label>
-                  <input
-                      type="password"
-                      id="password-current"
-                      placeholder="Your current password"
-                      v-model="userInfo.password_current"
-                  />
-            </FormRow>
-          </FormSection>
-
-          <TextButton @click="setUserData()" text="Change user information"/>
-        </SubSection>
-
-        <SubSection title="Logout">
-          <TextButton @click="logout()" text="logout"/>
-        </SubSection>
-      </template>
-
-      <template v-else>
-        <SubSection title="Returning users">
-          <TextButton text="Login" @click="$emit('change-view','user-login')"/>
-        </SubSection>
-
-        <SubSection title="New users">
-          <TextButton text="Sign up" @click="$emit('change-view','user-sign-up')"/>
-        </SubSection>
-      </template>
-    </template>
-  </ViewBase>
-</template>
+<!--
+  View for user options if user has logged in.
+  If user hasn't logged in, view shows login / signup links to sub views.
+-->
 
 <script>
 import user from "@/utilities/user";
@@ -192,3 +95,105 @@ export default {
   }
 }
 </script>
+
+<template>
+  <ViewBase title="User">
+    <template v-slot:content>
+      <template v-if="user().hasLoggedIn()">
+        <SubSection title="Change user information">
+          <NotificationSign
+              type="information"
+              message="Due to devs being lazy, you'll have to change every user information at the same time 😔"
+          />
+          <FormSection>
+            <FormRow>
+              <label for="username">Username</label>
+              <input
+                  type="text"
+                  id="username"
+                  :placeholder="userInfoComputed.username_current"
+                  v-model="userInfo.username_new"
+              />
+            </FormRow>
+
+            <FormRow>
+              <label for="email">Email</label>
+              <input
+                  type="email"
+                  id="email"
+                  :placeholder="userInfoComputed.email_current"
+                  v-model="userInfo.email_new"
+              />
+            </FormRow>
+
+            <FormRow>
+              <label for="password">Password</label>
+              <input
+                  type="password"
+                  id="password"
+                  placeholder="Password"
+                  v-model="userInfo.password_new"
+              />
+
+              <label for="passord-repeated">Repeat password</label>
+              <input
+                  type="password"
+                  id="passord-repeated"
+                  placeholder="Repeat password"
+                  v-model="userInfo.password_new_repeated"
+              />
+            </FormRow>
+
+            <FormRow>
+              <NotificationSign
+                  type="warning"
+                  message="If you decide to remove your acconut, you can't revert the changes!"
+              />
+              <label for="user-deletion">Delete user</label>
+              <input
+                  type="checkbox"
+                  id="user-deletion"
+                  v-model="userInfo.disabled"
+              />
+            </FormRow>
+
+            <FormRow place="last">
+              <p><i>To confirm your changes, you'll have to give your current. Login info</i></p>
+              <label for="email-current">Email</label>
+              <input
+                  type="email"
+                  id="email-current"
+                  placeholder="Your current username"
+                  v-model="userInfo.email_current"
+              />
+
+              <label for="password-current">Password</label>
+              <input
+                  type="password"
+                  id="password-current"
+                  placeholder="Your current password"
+                  v-model="userInfo.password_current"
+              />
+            </FormRow>
+          </FormSection>
+
+          <TextButton @click="setUserData()" text="Change user information"/>
+        </SubSection>
+
+        <SubSection title="Logout">
+          <TextButton @click="logout()" text="logout"/>
+        </SubSection>
+      </template>
+
+      <template v-else>
+        <SubSection title="Returning users">
+          <TextButton text="Login" @click="$emit('change-view','user-login')"/>
+        </SubSection>
+
+        <SubSection title="New users">
+          <TextButton text="Sign up" @click="$emit('change-view','user-sign-up')"/>
+        </SubSection>
+      </template>
+    </template>
+  </ViewBase>
+</template>

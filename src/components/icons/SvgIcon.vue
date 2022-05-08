@@ -1,3 +1,36 @@
+<!--
+  Svg icon that can have custom size and color.
+  Some icons supports two states inactive, and active.
+
+  Attributes
+    name:   Name of the icon.
+            Supported icons that doesn't support active state:
+              close     | toggle-on   | toggle-off
+              square    | information | success
+              warning   | error       | no-connection
+              toxic     | home        | user
+              loading   |             |
+            Supported icons that supports active state:
+              add       | next        | previous
+              help      | comment     | vote-up
+              vote-down | markdown    | private
+    active: Sets the icon to it's active mode
+    size:   Has 3 modes. "small", "medium", and "large"
+    color:  TAKES IN VARIABLE NAMES, NOT #FFFFFF VALUES!
+-->
+
+<script>
+export default {
+  name: "SvgIcon",
+  props: {
+    name: { type: String },
+    active: { type: Boolean, default: false},
+    size: { type: String, default: "small" },
+    color: { type: String, default: "--text-heading-color" },
+  },
+}
+</script>
+
 <template>
   <svg :class="size" :style="`fill: var(${color});`" viewBox="0 0 16 16">
     <template v-if="name === 'add'">
@@ -149,15 +182,3 @@
     </template>
   </svg>
 </template>
-
-<script>
-export default {
-  name: "SvgIcon",
-  props: {
-    name: { type: String },
-    active: { type: Boolean, default: false},
-    size: { type: String, default: "small" },
-    color: { type: String, default: "--text-heading-color" },
-  },
-}
-</script>

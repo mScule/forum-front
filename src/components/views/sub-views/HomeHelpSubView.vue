@@ -1,69 +1,62 @@
+<!--
+  Sub view for help section that explains the meaning of the website.
+  It also contains the link to the api, and credits.
+-->
+
+<script>
+import apiConfig from "@/api/api-config";
+
+import SubView from "@/components/views/SubView";
+import SubSection from "@/components/content/SubSection";
+
+export default {
+  name: "HomeHelpSubView",
+  components: {SubSection, SubView},
+  data() {
+    return {
+      apiUrl: apiConfig.url,
+    }
+  }
+}
+</script>
+
 <template>
-  <SubView title="Post feed - help" return-to="home">
-    <SubSection class="home-help-sub-view-explanations" title="Post color codes">
-      <p>
-        The color codes indicate the reception of the posts.
-        Color codes are explained below.
-      </p>
+  <SubView title="Forum - help" return-to="home">
+    <SubSection class="home-help-sub-view-explanations" title="F🤬rum website ">
       <div>
-        <h3>Fine</h3>
-        <IconExplainer
-            icon-name="square"
-            icon-color="--good"
-            explanation="Post has more positive votes than negative ones. Post author is fine (for now)"
-        />
+        <h3>What's up?</h3>
+        <p>
+          You can read, comment, and create posts in here and that's about it.
+          To comment and create posts, you'll have to create an acconut.
+        </p>
       </div>
-
       <div>
-        <h3>50/50</h3>
-        <IconExplainer
-            icon-name="square"
-            icon-color="--neutral"
-            explanation="Post has 0 votes. Post author is on the edge."
-        />
+        <h3>API</h3>
+        <p>To see what the api has to offer please visit:</p>
+        <br>
+        <a :href="`${apiUrl}api-docs`">{{ apiUrl }}api-docs/</a>
+        <h4>Note:</h4>
+        <p>Most of the queries needs the user session token!</p>
       </div>
-
       <div>
-        <h3>You are trash</h3>
-        <IconExplainer
-            icon-name="square"
-            icon-color="--bad-slightly"
-            explanation="Post has negative votes, but less than 30. Post author is presumably trash."
-        />
-      </div>
-
-      <div>
-        <h3>Delete System32</h3>
-        <IconExplainer
-            icon-name="square"
-            icon-color="--bad"
-            explanation="Post has 30 or more negative votes. Post author should stop using any social media altogether."
-        />
+        <h3>Credits</h3>
+        <p>Frontend: <b>Vilhelm Niemi</b></p>
+        <p>Backend: <b>Jonathan Methuen</b></p>
       </div>
     </SubSection>
   </SubView>
 </template>
 
-<script>
-import SubView from "@/components/views/SubView";
-import SubSection from "@/components/content/SubSection";
-import IconExplainer from "@/components/icons/IconExplainer";
-
-export default {
-  name: "HomeHelpSubView",
-  components: {IconExplainer, SubSection, SubView}
-}
-</script>
-
 <style scoped>
- .home-help-sub-view-explanations div{
-   border-bottom-style: solid;
-   border-bottom-color: var(--border-color);
-   border-bottom-width: var(--border-width);
-   padding-bottom: var(--padding-medium);
- }
- .home-help-sub-view-explanations div:last-child {
-   border: none;
-   padding-bottom: 0;
- }
+.home-help-sub-view-explanations div {
+  border-bottom-style: solid;
+  border-bottom-color: var(--border-color);
+  border-bottom-width: var(--border-width);
+  padding-bottom: var(--padding-medium);
+}
+
+.home-help-sub-view-explanations div:last-child {
+  border: none;
+  padding-bottom: 0;
+}
 </style>

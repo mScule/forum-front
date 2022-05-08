@@ -1,9 +1,9 @@
-<template>
-<section class="border">
-  <header><h3>{{title}}:</h3></header>
-  <slot></slot>
-</section>
-</template>
+<!--
+  Sub section is a glorified html5 section element with styling and header.
+
+  Attributes
+    title: Title of the section.
+-->
 
 <script>
 export default {
@@ -13,6 +13,13 @@ export default {
   }
 }
 </script>
+
+<template>
+<section class="border">
+  <header><h3>{{title}}:</h3></header>
+  <slot></slot>
+</section>
+</template>
 
 <style scoped>
 h3 {

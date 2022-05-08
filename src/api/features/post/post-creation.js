@@ -1,3 +1,7 @@
+/*
+    Post creation api access.
+*/
+
 "use strict";
 
 import apiAxios from "@/api/api-axios";

@@ -1,3 +1,8 @@
+/*
+    Small module that gives axios the config properties.
+    There might be some better ways for this one.
+*/
+
 "use strict";
 
 import axios from "axios";

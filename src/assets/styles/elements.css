@@ -79,6 +79,12 @@ main {
     max-width: 60em;
 }
 
+a {
+    color: var(--blue);
+    font-family: var(--font-paragraph);
+    font-style: italic;
+}
+
 @media (min-width: 60em) {
     .content-zone-wrapper {
         width: 100vw;

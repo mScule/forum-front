@@ -1,3 +1,7 @@
+<!--
+  The "main" component of the website.
+-->
+
 <script>
 import user from "@/utilities/user";
 import postFetching from "@/api/features/post/post-fetching";

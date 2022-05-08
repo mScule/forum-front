@@ -1,3 +1,51 @@
+<!--
+  Sub view for user signup form.
+-->
+
+<script>
+import userSignup from "@/api/features/user/user-signup";
+
+import NotificationSign from "@/components/notifications/NotificationSign";
+import SubView from "@/components/views/SubView";
+import SubSection from "@/components/content/SubSection";
+import FormSection from "@/components/forms/FormSection";
+import FormRow from "@/components/forms/FormRow";
+import TextButton from "@/components/buttons/TextButton";
+
+export default {
+  name: "UserSignUpSubView",
+  components: {TextButton, FormRow, FormSection, SubSection, SubView, NotificationSign},
+  methods: {
+    signup() {
+      if (this.fields.password !== this.fields.passwordRepeated) {
+        this.$emit("alert", {type: "error", message: "Repeated password doesn't match"});
+        return;
+      }
+
+      userSignup.userSignup(this.fields).then(success => {
+        if (success)
+          this.$emit("alert", {
+            type: "success",
+            message: "Signup was successfull! You can sign in to your new acconut."
+          });
+        else
+          this.$emit("alert", {type: "error", message: "Signup was unsuccessfull"});
+      });
+    }
+  },
+  data() {
+    return {
+      fields: {
+        name: "",
+        email: "",
+        password: "",
+        passwordRepeated: "",
+      }
+    }
+  }
+}
+</script>
+
 <template>
   <SubView title="Sign up" return-to="user">
     <NotificationSign
@@ -56,51 +104,3 @@
     </SubSection>
   </SubView>
 </template>
-
-<script>
-import userSignup from "@/api/features/user/user-signup";
-
-import NotificationSign from "@/components/notifications/NotificationSign";
-import SubView from "@/components/views/SubView";
-import SubSection from "@/components/content/SubSection";
-import FormSection from "@/components/forms/FormSection";
-import FormRow from "@/components/forms/FormRow";
-import TextButton from "@/components/buttons/TextButton";
-
-export default {
-  name: "UserSignUpSubView",
-  components: {TextButton, FormRow, FormSection, SubSection, SubView, NotificationSign},
-  methods: {
-    signup() {
-      if (this.fields.password !== this.fields.passwordRepeated) {
-        this.$emit("alert", {type: "error", message: "Repeated password doesn't match"});
-        return;
-      }
-
-      userSignup.userSignup(this.fields).then(success => {
-        if (success)
-          this.$emit("alert", {
-            type: "success",
-            message: "Signup was successfull! You can sign in to your new acconut."
-          });
-        else
-          this.$emit("alert", {type: "error", message: "Signup was unsuccessfull"});
-      });
-    }
-  },
-  data() {
-    return {
-      fields: {
-        name: "",
-        email: "",
-        password: "",
-        passwordRepeated: "",
-      }
-    }
-  }
-}
-</script>
-
-<style scoped>
-
-</style>

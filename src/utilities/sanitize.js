@@ -1,3 +1,7 @@
+/*
+    Utility for input sanitation.
+*/
+
 "use strict";
 
 export default {

@@ -1,3 +1,7 @@
+/*
+    Post fetching api access.
+*/
+
 "use strict";
 
 import apiAxios from "@/api/api-axios";
@@ -25,7 +29,7 @@ export default {
 
         const posts = [];
 
-        if(typeof res.data === "object" && res.data.length > 0) {
+        if (typeof res.data === "object" && res.data.length > 0) {
             for (let post of res.data) {
                 // Username
                 const user = await req.get("/users", {

@@ -1,3 +1,7 @@
+/*
+    Utility for handling cookies.
+*/
+
 "use strict";
 
 export default {

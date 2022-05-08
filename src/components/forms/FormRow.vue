@@ -1,3 +1,20 @@
+<!--
+  Component that resembles the form row.
+
+  Attributes
+    place: Has 3 modes. "first", "last", and "middle".
+           To use "middle" option, don't give any value as attribute.
+-->
+
+<script>
+export default {
+  name: "FormRow",
+  props: {
+    place: String
+  }
+}
+</script>
+
 <template>
   <div v-if="place === 'first'" class="first">
     <slot></slot>
@@ -11,15 +28,6 @@
     <slot></slot>
   </div>
 </template>
-
-<script>
-export default {
-  name: "FormRow",
-  props: {
-    place: String
-  }
-}
-</script>
 
 <style scoped>
 

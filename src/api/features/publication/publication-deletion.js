@@ -1,3 +1,8 @@
+/*
+    Publication deletion api access.
+    For posts and comments.
+*/
+
 "use strict";
 
 import apiAxios from "@/api/api-axios";

@@ -1,3 +1,7 @@
+/*
+    Utility for creating milliseconds.
+*/
+
 "use strict";
 
 export default {

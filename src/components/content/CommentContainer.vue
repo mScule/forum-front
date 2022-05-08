@@ -1,18 +1,14 @@
-<template>
-  <div class="comment-container border">
-    <h5>{{ author }}:</h5>
-    <p>{{ comment }}</p>
-    <div class="row-between">
-      <div class="comment-container-date">
-        <p class="vertical-center">Date: {{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</p>
-      </div>
+<!--
+  Component that shows comment.
 
-      <div class="row-between comment-container-post-buttons">
-        <IconButton v-if="authorIsUser" icon-name="private"/>
-      </div>
-    </div>
-  </div>
-</template>
+  Attributes
+    author:         Name of the author of the comment.
+    comment:        The comment itself.
+    up-votes:       Amount of upvotes.
+    down-votes:     Amount of downvotes.
+    date:           Date when the comment was written.
+    author-is-user: Boolean value that gives access to the private button.
+-->
 
 <script>
 import IconButton from "@/components/buttons/IconButton";
@@ -33,11 +29,28 @@ export default {
 }
 </script>
 
+<template>
+  <div class="comment-container border">
+    <h5>{{ author }}:</h5>
+    <p>{{ comment }}</p>
+    <div class="row-between">
+      <div class="comment-container-date">
+        <p class="vertical-center">Date: {{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</p>
+      </div>
+
+      <div class="row-between comment-container-post-buttons">
+        <IconButton v-if="authorIsUser" icon-name="private"/>
+      </div>
+    </div>
+  </div>
+</template>
+
 <style scoped>
 h5 {
   margin-top: 0;
   margin-bottom: var(--margin-small);
 }
+
 .comment-container {
   padding: var(--padding-medium);
   margin-top: var(--margin-medium);

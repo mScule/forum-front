@@ -1,3 +1,27 @@
+<!--
+  Static notification.
+
+  Attributes
+    type:    Type of the notification. Has 4, "information", "success", "warning", and "error".
+             Defaults to "information".
+    message: The message that will be shown.
+-->
+
+<script>
+import BaseSign from "@/components/notifications/BaseSign";
+
+export default {
+  name: "NotificationSign",
+  components: {
+    BaseSign
+  },
+  props: {
+    message: String,
+    type: {type: String, default: "information"}
+  }
+}
+</script>
+
 <template>
   <BaseSign
       v-if="type === 'success'"
@@ -29,21 +53,6 @@
       icon-name="information"
   />
 </template>
-
-<script>
-import BaseSign from "@/components/notifications/BaseSign";
-
-export default {
-  name: "NotificationSign",
-  components: {
-    BaseSign
-  },
-  props: {
-    message: String,
-    type: {type: String, default: "information"}
-  }
-}
-</script>
 
 <style scoped>
 .information {

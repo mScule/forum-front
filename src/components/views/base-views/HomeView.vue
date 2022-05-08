@@ -1,28 +1,6 @@
-<template>
-  <ViewBase title="Post feed">
-    <template v-slot:header>
-      <IconButton icon-name="help" @click="$emit('change-view','home-help')"/>
-    </template>
-
-    <template v-slot:content>
-      <div id="home-view-posts" :class="bottomMargin()">
-        <template v-if="this.posts">
-          <template v-for="post in this.posts" :key="post.publication_id">
-            <PostLink
-                :post-name="post.title"
-                :author-name="post.name"
-                :up-votes="post.upvotes"
-                :down-votes="post.downvotes"
-                :date="new Date(post.date)"
-                @click="$emit('open-post', post.publication_id)"
-            />
-          </template>
-        </template>
-        <LoadingAnimatedIcon/>
-      </div>
-    </template>
-  </ViewBase>
-</template>
+<!--
+  The main view of the website.
+-->
 
 <script>
 import user from "@/utilities/user";
@@ -60,6 +38,32 @@ export default {
   }
 }
 </script>
+
+<template>
+  <ViewBase title="Post feed">
+    <template v-slot:header>
+      <IconButton icon-name="help" @click="$emit('change-view','home-help')"/>
+    </template>
+
+    <template v-slot:content>
+      <div id="home-view-posts" :class="bottomMargin()">
+        <template v-if="this.posts">
+          <template v-for="post in this.posts" :key="post.publication_id">
+            <PostLink
+                :post-name="post.title"
+                :author-name="post.name"
+                :up-votes="post.upvotes"
+                :down-votes="post.downvotes"
+                :date="new Date(post.date)"
+                @click="$emit('open-post', post.publication_id)"
+            />
+          </template>
+        </template>
+        <LoadingAnimatedIcon/>
+      </div>
+    </template>
+  </ViewBase>
+</template>
 
 <style scoped>
 .home-view-user-has-logged-in {

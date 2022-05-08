@@ -1,53 +1,6 @@
-<template>
-  <SubView :title="title" return-to="home">
-    <h4>Author: {{ author }}</h4>
-    <p>{{ content }}</p>
-    <div class="row-between">
-      <p class="vertical-center">Date: {{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</p>
-      <div class="row-between post-sub-view-post-buttons">
-        <IconButton v-if="authorIsUser" @click="privatePost" icon-name="private"/>
-      </div>
-    </div>
-    <template v-if="comments">
-      <h4>Comments: </h4>
-      <template v-for="comment of comments" :key="comment.postId">
-        <CommentContainer
-            v-if="comment.user_id == this.user().id()"
-            :author="comment.name"
-            :comment="comment.content"
-            :up-votes="comment.upvotes"
-            :down-votes="comment.downvotes"
-            :date="new Date(comment.date)"
-            :author-is-user="true"
-            @click="privateComment(comment.publication_id)"
-        />
-        <CommentContainer
-            v-else
-            :author="comment.name"
-            :comment="comment.content"
-            :up-votes="comment.upvotes"
-            :down-votes="comment.downvotes"
-            :date="new Date(comment.date)"
-            :author-is-user="false"
-        />
-      </template>
-    </template>
-    <SubSection title="Write a comment">
-      <template v-if="user().hasLoggedIn()">
-        <NotificationSign
-            type="warning"
-            message="Remember. You can't delete your comments, so think twice what type of content you want to put out. Everything you publish can be tracked back to you."
-        />
-        <textarea id="user-comment" v-model="userComment"></textarea>
-        <TextButton @click="createComment" text="Publish"/>
-      </template>
-
-      <template v-else>
-        <NotificationSign type="information" message="To comment on posts, you have to be logged in."/>
-      </template>
-    </SubSection>
-  </SubView>
-</template>
+<!--
+  Sub view for reading posts.
+-->
 
 <script>
 import user from "@/utilities/user";
@@ -73,7 +26,7 @@ export default {
           .then(
               comments => {
                 console.log("COMMENTS", comments);
-                if(typeof comments === "object" && comments.length > 0)
+                if (typeof comments === "object" && comments.length > 0)
                   this.comments = comments;
                 else
                   this.comments = null;
@@ -142,6 +95,57 @@ export default {
   }
 }
 </script>
+
+<template>
+  <SubView :title="title" return-to="home">
+    <h4>Author: {{ author }}</h4>
+    <p>{{ content }}</p>
+    <div class="row-between">
+      <p class="vertical-center">Date: {{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</p>
+      <div class="row-between post-sub-view-post-buttons">
+        <IconButton v-if="authorIsUser" @click="privatePost" icon-name="private"/>
+      </div>
+    </div>
+    <template v-if="comments">
+      <h4>Comments: </h4>
+      <template v-for="comment of comments" :key="comment.postId">
+        <CommentContainer
+            v-if="comment.user_id == this.user().id()"
+            :author="comment.name"
+            :comment="comment.content"
+            :up-votes="comment.upvotes"
+            :down-votes="comment.downvotes"
+            :date="new Date(comment.date)"
+            :author-is-user="true"
+            @click="privateComment(comment.publication_id)"
+        />
+        <CommentContainer
+            v-else
+            :author="comment.name"
+            :comment="comment.content"
+            :up-votes="comment.upvotes"
+            :down-votes="comment.downvotes"
+            :date="new Date(comment.date)"
+            :author-is-user="false"
+        />
+      </template>
+    </template>
+    <SubSection title="Write a comment">
+      <template v-if="user().hasLoggedIn()">
+        <NotificationSign
+            type="warning"
+            message="Remember. You can't delete your comments, so think twice what type of content you want to put out. Everything you publish can be tracked back to you."
+        />
+        <textarea id="user-comment" v-model="userComment"></textarea>
+        <TextButton @click="createComment" text="Publish"/>
+      </template>
+
+      <template v-else>
+        <NotificationSign type="information" message="To comment on posts, you have to be logged in."/>
+      </template>
+    </SubSection>
+  </SubView>
+</template>
 
 <style scoped>
 #user-comment {

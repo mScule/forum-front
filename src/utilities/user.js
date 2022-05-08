@@ -1,3 +1,7 @@
+/*
+    Utility for getting and setting the user related cookies.
+*/
+
 "use strict";
 
 import cookies from "@/utilities/cookies";

@@ -1,20 +1,13 @@
-<template>
-  <div class="border post-link-container">
-    <header class="post-link-name-header border-bottom">
-      <h4 class="post-link-header-bg">{{ postName }}</h4>
-    </header>
+<!--
+  Link to a post.
 
-    <section class="post-link">
-      <div class="post-link-info-row">
-        <p>Author: <i>{{authorName}}</i></p>
-      </div>
-
-      <div class="post-link-info-row">
-        <p class="post-link-date">Date: <i>{{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</i></p>
-      </div>
-    </section>
-  </div>
-</template>
+  Attributes:
+    post-name:   Name of the post.
+    author-name: Name of the author.
+    up-votes:    Amount of upvotes.
+    down-votes:  Amount of downvotes.
+    date:        Date when the post was created.
+-->
 
 <script>
 export default {
@@ -45,6 +38,24 @@ export default {
   }
 }
 </script>
+
+<template>
+  <div class="border post-link-container">
+    <header class="post-link-name-header border-bottom">
+      <h4 class="post-link-header-bg">{{ postName }}</h4>
+    </header>
+
+    <section class="post-link">
+      <div class="post-link-info-row">
+        <p>Author: <i>{{ authorName }}</i></p>
+      </div>
+
+      <div class="post-link-info-row">
+        <p class="post-link-date">Date: <i>{{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</i></p>
+      </div>
+    </section>
+  </div>
+</template>
 
 <style scoped>
 header {

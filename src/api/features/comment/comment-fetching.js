@@ -1,3 +1,7 @@
+/*
+    Comment fetching api access.
+*/
+
 "use strict";
 
 import apiAxios from "@/api/api-axios";
@@ -27,7 +31,7 @@ export default {
 
         console.log("RESS", res);
 
-        if(typeof res.data === "object" && res.data.length > 0) {
+        if (typeof res.data === "object" && res.data.length > 0) {
             for (let comment of res.data) {
                 console.log("COMMENT", comment);
 
@@ -44,7 +48,6 @@ export default {
                 });
 
                 comment.name = user.data[0].name;
-
                 comments.push(comment);
             }
         }

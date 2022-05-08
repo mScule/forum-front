@@ -1,17 +1,3 @@
-<template>
-  <div class="base-sign-main-container information border">
-    <div class="base-sign-heading border-bottom">
-      <h3>{{ heading }}</h3>
-      <div class="base-sign-svg-icon">
-        <SvgIcon v-if="iconColor" :name="iconName" :color="iconColor" size="medium"/>
-        <SvgIcon v-else :name="iconName" size="medium"/>
-      </div>
-    </div>
-    <div class="base-sign-body">
-      <p>{{ message }}</p>
-    </div>
-  </div>
-</template>
 <script>
 import SvgIcon from "@/components/icons/SvgIcon";
 
@@ -28,6 +14,21 @@ export default {
   }
 }
 </script>
+
+<template>
+  <div class="base-sign-main-container information border">
+    <div class="base-sign-heading border-bottom">
+      <h3>{{ heading }}</h3>
+      <div class="base-sign-svg-icon">
+        <SvgIcon v-if="iconColor" :name="iconName" :color="iconColor" size="medium"/>
+        <SvgIcon v-else :name="iconName" size="medium"/>
+      </div>
+    </div>
+    <div class="base-sign-body">
+      <p>{{ message }}</p>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 h3 {
