@@ -27,41 +27,26 @@ export default {
 
         console.log("RESS", res);
 
-        for(let comment of res.data) {
-            console.log("COMMENT", comment);
+        if(typeof res.data === "object" && res.data.length > 0) {
+            for (let comment of res.data) {
+                console.log("COMMENT", comment);
 
-            // Username
-            const user = await req.get("/users", {
-                params: {
-                    get_current_user: false,
-                    disabled: "",
-                    user_id: comment.user_id,
-                    name: "any",
-                    email: "any",
-                    password: "any",
-                }
-            });
+                // Username
+                const user = await req.get("/users", {
+                    params: {
+                        get_current_user: false,
+                        disabled: "",
+                        user_id: comment.user_id,
+                        name: "any",
+                        email: "any",
+                        password: "any",
+                    }
+                });
 
-            let upvotes = 0, downvotes = 0;
+                comment.name = user.data[0].name;
 
-            /*
-            // Votes
-            const votes = await req.get("/votes", {
-               params: {
-                   user_id: "any",
-                   publication_id: post.publication_id,
-                   vote: "any",
-               }
-            });
-            */
-
-            console.log("USER", user);
-
-            comment.name = user.data[0].name;
-            comment.upvotes = upvotes;
-            comment.downvotes = downvotes;
-
-            comments.push(comment);
+                comments.push(comment);
+            }
         }
 
         if (comments.length !== 0)

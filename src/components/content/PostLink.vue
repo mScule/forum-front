@@ -1,7 +1,7 @@
 <template>
-  <div class="border post-link-container" :style="`border-color: var(${colorWithVoteRatio()})`">
-    <header class="post-link-name-header border-bottom" :style="`border-color: var(${colorWithVoteRatio()});`">
-      <h4 :style="`color: var(${colorWithVoteRatio()})`">{{ postName }}</h4>
+  <div class="border post-link-container">
+    <header class="post-link-name-header border-bottom">
+      <h4 class="post-link-header-bg">{{ postName }}</h4>
     </header>
 
     <section class="post-link">
@@ -10,7 +10,6 @@
       </div>
 
       <div class="post-link-info-row">
-        <p>Votes: <i>{{ upVotes - downVotes }}</i></p>
         <p class="post-link-date">Date: <i>{{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</i></p>
       </div>
     </section>
@@ -61,13 +60,17 @@ header h4 {
 
 .post-link-container {
   cursor: pointer;
-  border-radius: var(--border-radius-round);
+  border-radius: var(--border-radius-sharp);
 }
 
 .post-link-name-header h4 {
   margin: 0;
   padding: var(--padding-medium);
   overflow: hidden;
+}
+
+.post-link-header-bg {
+  background-color: var(--border-color);
 }
 
 .post-link-info-row {

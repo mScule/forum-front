@@ -115,6 +115,7 @@ export default {
             @open-post="openPost"
             @change-view="changeView"
             @update-posts="updatePosts"
+
             :post-id="getPostId"
             :posts="loadedPosts"
             :is="selectedView">

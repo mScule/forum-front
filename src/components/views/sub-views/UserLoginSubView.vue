@@ -1,5 +1,5 @@
 <template>
-<SubView title="Login" return-to="user">
+  <SubView title="Login" return-to="user">
     <SubSection title="Give your email, and password">
       <FormSection>
         <FormRow place="first">
@@ -25,12 +25,13 @@
         <TextButton @click="login()" text="Login"/>
       </FormSection>
     </SubSection>
-</SubView>
+  </SubView>
 </template>
 
 <script>
 import user from "@/utilities/user";
 import userLogin from "@/api/features/user/user-login";
+import userData from "@/api/features/user/user-data";
 
 import SubView from "@/components/views/SubView";
 import SubSection from "@/components/content/SubSection";
@@ -51,8 +52,17 @@ export default {
           return;
         }
         user.setLoginStatus(true);
-        this.$emit("alert", {type: "success", message: "Login was successfull. Welcome in!"});
-        this.$emit("change-view", "home");
+        userData.userData.get()
+            .then(data => {
+              user.setUserId(data.user_id);
+              this.$emit("alert", {type: "success", message: "Login was successfull. Welcome in!"});
+              this.$emit("change-view", "home");
+            })
+            .catch(() => {
+              user.setLoginStatus(false);
+              this.$emit("alert", {type: "error", message: "Error while fetching user data login aborted"});
+              this.$emit("change-view", "home");
+            })
       });
     }
   },

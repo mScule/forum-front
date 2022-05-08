@@ -13,8 +13,6 @@
       </div>
 
       <div class="row-between comment-container-post-buttons">
-        <IconButton icon-name="vote-up" size="medium"/>
-        <IconButton icon-name="vote-down" size="medium"/>
         <IconButton v-if="authorIsUser" icon-name="private"/>
       </div>
     </div>

@@ -11,15 +11,24 @@
         <p class="vertical-center">Date: {{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</p>
       </div>
       <div class="row-between post-sub-view-post-buttons">
-        <IconButton icon-name="vote-up" size="medium"/>
-        <IconButton icon-name="vote-down" size="medium"/>
-        <IconButton v-if="authorIsUser" icon-name="private"/>
+        <IconButton v-if="authorIsUser" @click="privatePost" icon-name="private"/>
       </div>
     </div>
     <template v-if="comments">
       <h4>Comments: </h4>
       <template v-for="comment of comments" :key="comment.postId">
         <CommentContainer
+            v-if="comment.user_id == this.user().id()"
+            :author="comment.name"
+            :comment="comment.content"
+            :up-votes="comment.upvotes"
+            :down-votes="comment.downvotes"
+            :date="new Date(comment.date)"
+            :author-is-user="true"
+            @click="privateComment(comment.publication_id)"
+        />
+        <CommentContainer
+            v-else
             :author="comment.name"
             :comment="comment.content"
             :up-votes="comment.upvotes"
@@ -50,6 +59,7 @@
 import user from "@/utilities/user";
 import commentCreation from "@/api/features/comment/comment-creation";
 import commentFetching from "@/api/features/comment/comment-fetching";
+import publicationDeletion from "@/api/features/publication/publication-deletion";
 
 import SubView from "@/components/views/SubView";
 import IconButton from "@/components/buttons/IconButton";
@@ -69,7 +79,10 @@ export default {
           .then(
               comments => {
                 console.log("COMMENTS", comments);
-                this.comments = comments;
+                if(typeof comments === "object" && comments.length > 0)
+                  this.comments = comments;
+                else
+                  this.comments = null;
               }
           )
     },
@@ -85,6 +98,19 @@ export default {
             this.userComment = "";
           });
     },
+    privateComment(commentId) {
+      publicationDeletion.delete(commentId).then(() => {
+        setTimeout(() => {
+          console.log("DELETED");
+          this.fetchComments()
+        }, 100);
+      });
+    },
+    privatePost() {
+      publicationDeletion.delete(this.postId).then(() => {
+        this.$emit("change-view", "home");
+      })
+    }
   },
   props: {
     postId: Number,
@@ -114,6 +140,7 @@ export default {
         this.date = new Date(post.date);
         this.upVotes = post.upvotes;
         this.downVotes = post.downvotes;
+        this.authorIsUser = post.user_id == this.user().id();
         break;
       }
     }

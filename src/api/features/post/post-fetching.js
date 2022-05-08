@@ -25,37 +25,23 @@ export default {
 
         const posts = [];
 
-        for(let post of res.data) {
-            // Username
-            const user = await req.get("/users", {
-                params: {
-                    get_current_user: false,
-                    disabled: "",
-                    user_id: post.user_id,
-                    name: "any",
-                    email: "any",
-                    password: "any",
-                }
-            });
+        if(typeof res.data === "object" && res.data.length > 0) {
+            for (let post of res.data) {
+                // Username
+                const user = await req.get("/users", {
+                    params: {
+                        get_current_user: false,
+                        disabled: "",
+                        user_id: post.user_id,
+                        name: "any",
+                        email: "any",
+                        password: "any",
+                    }
+                });
 
-            let upvotes = 0, downvotes = 0;
-
-            /*
-            // Votes
-            const votes = await req.get("/votes", {
-               params: {
-                   user_id: "any",
-                   publication_id: post.publication_id,
-                   vote: "any",
-               }
-            });
-            */
-
-            post.name = user.data[0].name;
-            post.upvotes = upvotes;
-            post.downvotes = downvotes;
-
-            posts.push(post);
+                post.name = user.data[0].name;
+                posts.push(post);
+            }
         }
 
         if (posts.lenght !== 0)

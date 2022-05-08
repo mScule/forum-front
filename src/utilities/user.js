@@ -14,5 +14,15 @@ export default {
             cookies.set("forum-user-login-status", `${status}`, millis.fromMinutes(15));
         else
             cookies.delete("forum-user-login-status");
+    },
+    id() {
+        const userId = cookies.get("forum-user-id");
+        console.log("USER_ID", userId);
+        if(userId)
+            return userId;
+        return false;
+    },
+    setUserId(id) {
+        cookies.set("forum-user-id", `${id}`, millis.fromMinutes(15));
     }
 }
