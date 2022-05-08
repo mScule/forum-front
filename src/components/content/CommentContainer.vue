@@ -3,11 +3,6 @@
     <h5>{{ author }}:</h5>
     <p>{{ comment }}</p>
     <div class="row-between">
-      <div class="row-left comment-container-vote-section">
-        <p class="vertical-center">Upvotes: {{ upVotes }}</p>
-        <p class="vertical-center">Downvotes: {{ downVotes }}</p>
-      </div>
-
       <div class="comment-container-date">
         <p class="vertical-center">Date: {{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}` }}</p>
       </div>
@@ -64,9 +59,5 @@ h5 {
 .comment-container-vote-section, .comment-container-date {
   font-size: var(--font-size-small);
   width: 100%;
-}
-
-.comment-container-date {
-  text-align: center;
 }
 </style>
