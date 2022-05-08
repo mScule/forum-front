@@ -3,7 +3,7 @@
 import apiAxios from "@/api/api-axios";
 
 export default {
-    fetchAll: async () => {
+    postReplies: async (fields) => {
         const req = apiAxios.createInstance();
         let res;
         await req.get("/publications", {
@@ -11,10 +11,10 @@ export default {
                 private: "0",
                 publication_id: "any",
                 user_id: "any",
-                type: "post",
+                type: "comment",
                 title: "any",
                 content: "any",
-                reply_to_id: "any"
+                reply_to_id: fields.postId,
             }
         })
             .then(posts => res = posts)
@@ -23,15 +23,19 @@ export default {
                 res = false;
             });
 
-        const posts = [];
+        const comments = [];
 
-        for(let post of res.data) {
+        console.log("RESS", res);
+
+        for(let comment of res.data) {
+            console.log("COMMENT", comment);
+
             // Username
             const user = await req.get("/users", {
                 params: {
                     get_current_user: false,
                     disabled: "",
-                    user_id: post.user_id,
+                    user_id: comment.user_id,
                     name: "any",
                     email: "any",
                     password: "any",
@@ -51,15 +55,17 @@ export default {
             });
             */
 
-            post.name = user.data[0].name;
-            post.upvotes = upvotes;
-            post.downvotes = downvotes;
+            console.log("USER", user);
 
-            posts.push(post);
+            comment.name = user.data[0].name;
+            comment.upvotes = upvotes;
+            comment.downvotes = downvotes;
+
+            comments.push(comment);
         }
 
-        if (posts.lenght !== 0)
-            res = posts;
+        if (comments.length !== 0)
+            res = comments;
         return res;
     }
 }

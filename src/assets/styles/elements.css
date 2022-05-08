@@ -74,3 +74,20 @@ svg.large {
     width: var(--icon-size-large);
     height: var(--icon-size-large);
 }
+
+main {
+    max-width: 60em;
+}
+
+@media (min-width: 60em) {
+    .content-zone-wrapper {
+        width: 100vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .content-zone {
+        display: block;
+        width: 60em;
+    }
+}

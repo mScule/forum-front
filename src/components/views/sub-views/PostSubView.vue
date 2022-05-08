@@ -16,16 +16,27 @@
         <IconButton v-if="authorIsUser" icon-name="private"/>
       </div>
     </div>
-    <h4>Comments: </h4>
-    <p>Construction zone!</p>
+    <template v-if="comments">
+      <h4>Comments: </h4>
+      <template v-for="comment of comments" :key="comment.postId">
+        <CommentContainer
+            :author="comment.name"
+            :comment="comment.content"
+            :up-votes="comment.upvotes"
+            :down-votes="comment.downvotes"
+            :date="new Date(comment.date)"
+            :author-is-user="false"
+        />
+      </template>
+    </template>
     <SubSection title="Write a comment">
       <template v-if="user().hasLoggedIn()">
         <NotificationSign
             type="warning"
             message="Remember. You can't delete your comments, so think twice what type of content you want to put out. Everything you publish can be tracked back to you."
         />
-        <textarea id="user-comment"></textarea>
-        <TextButton text="Publish"/>
+        <textarea id="user-comment" v-model="userComment"></textarea>
+        <TextButton @click="createComment" text="Publish"/>
       </template>
 
       <template v-else>
@@ -37,19 +48,43 @@
 
 <script>
 import user from "@/utilities/user";
+import commentCreation from "@/api/features/comment/comment-creation";
+import commentFetching from "@/api/features/comment/comment-fetching";
 
 import SubView from "@/components/views/SubView";
 import IconButton from "@/components/buttons/IconButton";
 import SubSection from "@/components/content/SubSection";
-//import CommentContainer from "@/components/content/CommentContainer";
+import CommentContainer from "@/components/content/CommentContainer";
 import TextButton from "@/components/buttons/TextButton";
 import NotificationSign from "@/components/notifications/NotificationSign";
 
 export default {
   name: "PostSubView",
-  components: {TextButton, /* CommentContainer, */ SubSection, IconButton, SubView, NotificationSign},
+  components: {TextButton, CommentContainer, SubSection, IconButton, SubView, NotificationSign},
   methods: {
     user: () => user,
+    fetchComments() {
+      console.log("FETCHING COMMENTS");
+      commentFetching.postReplies({postId: this.postId})
+          .then(
+              comments => {
+                console.log("COMMENTS", comments);
+                this.comments = comments;
+              }
+          )
+    },
+    createComment() {
+      commentCreation.commentCreation({userComment: this.userComment, postId: this.postId})
+          .then(res => {
+            if (!res) {
+              this.$emit("alert", {type: "error", message: "Comment creation failed"});
+              return;
+            }
+            this.$emit("alert", {type: "success", message: "Comment creation successfull"});
+            this.fetchComments();
+            this.userComment = "";
+          });
+    },
   },
   props: {
     postId: Number,
@@ -65,12 +100,14 @@ export default {
       downVotes: 0,
       commentAmt: 0,
       authorIsUser: false,
+      comments: null,
+      userComment: "",
     }
   },
   mounted() {
     console.log("POST-ID", this.postId);
-    for(const post of this.posts) {
-      if(post.publication_id === this.postId) {
+    for (const post of this.posts) {
+      if (post.publication_id === this.postId) {
         this.title = post.title;
         this.author = post.name;
         this.content = post.content;
@@ -80,6 +117,7 @@ export default {
         break;
       }
     }
+    this.fetchComments();
   }
 }
 </script>

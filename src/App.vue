@@ -1,31 +1,3 @@
-<template>
-  <main>
-    <TopBar @change-view="changeView"/>
-
-    <NotificationAlert
-        v-if="notification"
-        @close-notification-alert="closeAlert()"
-        :type="notificationAlertProps.type"
-        :message="notificationAlertProps.message"
-    />
-
-    <component
-        @alert="showAlert"
-        @open-post="openPost"
-        @change-view="changeView"
-        @update-posts="updatePosts"
-        :post-id="getPostId"
-        :posts="loadedPosts"
-        :is="selectedView">
-    </component>
-
-    <BottomBar
-        @change-view="changeView"
-        v-if="this.user().hasLoggedIn() && selectedView.name === 'HomeView'"
-    />
-  </main>
-</template>
-
 <script>
 import user from "@/utilities/user";
 import postFetching from "@/api/features/post/post-fetching";
@@ -124,6 +96,38 @@ export default {
   }
 }
 </script>
+
+<template>
+  <main>
+    <TopBar @change-view="changeView"/>
+
+    <NotificationAlert
+        v-if="notification"
+        @close-notification-alert="closeAlert()"
+        :type="notificationAlertProps.type"
+        :message="notificationAlertProps.message"
+    />
+
+    <div class="content-zone-wrapper">
+      <div class="content-zone">
+        <component
+            @alert="showAlert"
+            @open-post="openPost"
+            @change-view="changeView"
+            @update-posts="updatePosts"
+            :post-id="getPostId"
+            :posts="loadedPosts"
+            :is="selectedView">
+        </component>
+      </div>
+    </div>
+
+    <BottomBar
+        @change-view="changeView"
+        v-if="this.user().hasLoggedIn() && selectedView.name === 'HomeView'"
+    />
+  </main>
+</template>
 
 <style>
 @import "./assets/styles/colors.css";
